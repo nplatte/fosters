@@ -11,11 +11,13 @@ class Cat(models.Model):
     gender = models.CharField(choices=[('male', 'male'), ('female', 'female')], max_length=30, blank=True, null=True)
     color = models.CharField(max_length=30, blank=True, null=True)
     litter = models.ForeignKey('Litter', on_delete=models.SET_NULL,blank=True, null=True)
+    is_deleted = models.BooleanField(default=False)
 
 
 class Litter(models.Model):
 
     name = models.CharField(max_length=50, default="")
+    is_deleted = models.BooleanField(default=False)
 
 
 class Vaccination(models.Model):
@@ -25,6 +27,7 @@ class Vaccination(models.Model):
     serial_number = models.CharField(max_length=50, blank=True, null=True)
     date_given = models.DateField(default=date.today)
     next_due = models.JSONField(blank=True, null=True)
+    cat = models.ForeignKey('Cat', on_delete=models.CASCADE, default=1)
 
 
 class Test(models.Model):
@@ -32,6 +35,7 @@ class Test(models.Model):
     name = models.CharField(max_length=50, default="")
     date_administered = models.DateField(default=date.today)
     result = models.CharField(max_length=100, blank=True, null=True)
+    cat = models.ForeignKey('Cat', on_delete=models.CASCADE, default=1)
 
 
 class Preventative(models.Model):
@@ -41,6 +45,7 @@ class Preventative(models.Model):
     dosage = models.CharField(max_length=30, blank=True, null=True)
     date_given = models.DateField(default=date.today)
     next_due = models.DateField(blank=True, null=True)
+    cat = models.ForeignKey('Cat', on_delete=models.CASCADE, default=1)
 
 
 
@@ -52,6 +57,7 @@ class Treatment(models.Model):
     frequency = models.CharField(max_length=50, blank=True, null=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
+    cat = models.ForeignKey('Cat', on_delete=models.CASCADE, default=1)
 
 
 class Exam(models.Model):
@@ -62,6 +68,7 @@ class Exam(models.Model):
     vet = models.CharField(max_length=50, blank=True, null=True)
     taken_by = models.CharField(max_length=30, default="Kate")
     notes = models.TextField(blank=True, null=True)
+    cat = models.ForeignKey('Cat', on_delete=models.CASCADE, default=1)
 
 
 
@@ -71,3 +78,4 @@ class Weight(models.Model):
     unit = models.CharField(max_length=30, choices=[('g', 'g'), ('lb', 'lb')], default="lb")
     date = models.DateField(default=date.today)
     time = models.CharField(max_length=30, choices=[('am', 'am'), ('pm', 'pm')], blank=True, null=True)
+    cat = models.ForeignKey('Cat', on_delete=models.CASCADE, default=1)
