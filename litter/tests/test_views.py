@@ -6,7 +6,7 @@ class TestBasicGET(TestCase):
 
     def setUp(self):
         self.url_names = [
-            "landing", "add_cat", "edit_cat"
+            ["landing", {}], ["add_cat", {}], ["edit_cat", {"pk": 1}]
         ]
         return super().setUp()
 
@@ -15,7 +15,7 @@ class TestBasicGET(TestCase):
 
     def test_returns_200(self):
         for url_name in self.url_names:
-            with self.subTest(url=url_name):
-                url = reverse(url_name)
+            with self.subTest(url=url_name[0]):
+                url = reverse(url_name[0], kwargs=url_name[1])
                 response = self.client.get(url)
                 self.assertEqual(response.status_code, 200)
