@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from litter.models import *
 
 
@@ -8,6 +8,20 @@ class LandingView(View):
 
     def get(self, request):
         return render(request, 'litter/home.html')
+
+
+class AllCatsView(ListView):
+
+    template_name = 'litter/cat/all.html'
+
+    def get_queryset(self):
+        return Cat.objects.all()
+
+
+class CatView(DetailView):
+
+    model = Cat
+    template_name = 'litter/cat/detail.html'
 
 
 class AddCatView(CreateView):
@@ -22,7 +36,7 @@ class UpdateCatView(UpdateView):
     model = Cat
     fields = [
         'name', 'estimated_date_of_birth', 
-        'microchip', 'microchip_inserted_on', 'internal_id'
+        'microchip', 'microchip_inserted_on', 'internal_id',
         'gender', 'color', 'litter',
         'is_deleted'
         ]

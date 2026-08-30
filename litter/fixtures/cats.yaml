@@ -1,0 +1,4 @@
+- model: litter.cat
+  pk: 1
+  fields:
+    name: "Test Cat"

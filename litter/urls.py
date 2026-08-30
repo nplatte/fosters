@@ -4,6 +4,10 @@ from litter.views import *
 
 urlpatterns = [
     path("", LandingView.as_view(), name='landing'),
-    path("cat/add", AddCatView.as_view(), name='add_cat'),
-    path("cat/edit/<int:pk>", UpdateCatView.as_view(), name='edit_cat')
+    path("cat/", include([
+        path("add", AddCatView.as_view(), name='add_cat'),
+        path("edit/<int:pk>", UpdateCatView.as_view(), name='edit_cat'),
+        path("view/all", AllCatsView.as_view(), name='all_cats'),
+        path("view/<int:pk>", CatView.as_view(), name='cat')
+    ]))
 ]

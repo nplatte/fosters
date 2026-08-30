@@ -4,9 +4,12 @@ from django.urls import reverse
 
 class TestBasicGET(TestCase):
 
+    fixtures = ['cats']
+
     def setUp(self):
         self.url_names = [
-            ["landing", {}], ["add_cat", {}], ["edit_cat", {"pk": 1}]
+            ["landing", {}], ["add_cat", {}], ["edit_cat", {"pk": 1}],
+            ['all_cats', {}], ['cat', {"pk":1}]
         ]
         return super().setUp()
 
