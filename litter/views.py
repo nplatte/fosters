@@ -30,7 +30,6 @@ class AddCatView(CreateView):
     model = Cat
     fields = ['name', 'estimated_date_of_birth', 'gender', 'color', 'litter']
     template_name = 'litter/cat/add.html'
-    success_url = reverse('landing')
 
 class UpdateCatView(UpdateView):
 

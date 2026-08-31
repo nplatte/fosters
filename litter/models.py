@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.urls import reverse
 
 class Cat(models.Model):
 
@@ -12,6 +13,9 @@ class Cat(models.Model):
     color = models.CharField(max_length=30, blank=True, null=True)
     litter = models.ForeignKey('Litter', on_delete=models.SET_NULL,blank=True, null=True)
     is_deleted = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return reverse('cat', kwargs={"pk": self.pk})
 
 
 class Litter(models.Model):
