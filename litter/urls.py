@@ -11,6 +11,7 @@ urlpatterns = [
         path("view/<int:pk>", cat_views.CatView.as_view(), name='cat')
     ])),
     path("litter/", include([
-        path("add", litter_views.AddLitterView.as_view(), name='add_litter')
+        path("add", litter_views.AddLitterView.as_view(), name='add_litter'),
+        path("view/<int:pk>", litter_views.LitterView.as_view(), name='litter')
     ])),
 ]

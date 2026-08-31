@@ -3,6 +3,19 @@ from django.urls import reverse
 from litter.models import Litter
 
 
+class TestViewLitter(TestCase):
+
+    fixture = ['litters']
+
+    def setUp(self):
+        self.url = reverse('litter', kwargs={"pk": 1})
+        return super().setUp()
+
+    def test_GET_returns_200(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+
+
 class TestAddLitter(TestCase):
 
     def setUp(self):
@@ -22,4 +35,4 @@ class TestAddLitter(TestCase):
 
     def test_POST_redirects_to_cats_page(self):
         response = self.client.post(self.url, self.data)
-        self.assertRedirects(response, reverse("all_cats"))
+        self.assertRedirects(response, reverse("litter", kwargs={"pk": 1}))
