@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
 from litter.models import *
+from django.urls import reverse
 
 
 class LandingView(View):
@@ -29,6 +30,7 @@ class AddCatView(CreateView):
     model = Cat
     fields = ['name', 'estimated_date_of_birth', 'gender', 'color', 'litter']
     template_name = 'litter/cat/add.html'
+    success_url = reverse('landing')
 
 class UpdateCatView(UpdateView):
 
