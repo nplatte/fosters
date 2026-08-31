@@ -5,7 +5,7 @@ from litter.models import Litter
 
 class TestViewLitter(TestCase):
 
-    fixture = ['litters']
+    fixtures = ['litters']
 
     def setUp(self):
         self.url = reverse('litter', kwargs={"pk": 1})
