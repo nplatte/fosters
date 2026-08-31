@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
-from litter.models import *
-from django.urls import reverse
+from litter.models import Cat
 
 
 class LandingView(View):
