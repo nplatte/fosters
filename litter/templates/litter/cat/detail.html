@@ -1,0 +1,15 @@
+{% extends 'litter/base.html' %}
+
+{% block title %} Add Cat {% endblock %}
+
+{% block content %}
+<div class="base_info">
+    <h1>{{ cat.name }}</h1>
+    <label>DoB: </label><p>{{ cat.estimated_date_of_birth }}</p>
+    <label>Microchip: </label><p>{{ cat.microchip }} inserted on {{ cat.microchip_inserted_on }}</p>
+    <label>Internal ID: </label><p>{{ cat.internal_id }}</p>
+    <label>Gender: </label><p>{{ cat.gender }}</p>
+    <label>Color: </label><p>{{ cat.color }}</p>
+    <label>Litter: </label><p>{{ cat.litter }}</p>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'litter/base.html' %}
+
+{% block title %} Cats {% endblock %}
+
+{% block content %}
+{% for cat in object_list %}
+<h1>{{ cat.name }}</h1>
+<label>Litter: </label><p>{{ cat.litter }}</p>
+<a href="{{ cat.get_absolute_url }}">View Cat</a>
+{% endfor %}
+{% endblock %}
