@@ -23,6 +23,9 @@ class Litter(models.Model):
     name = models.CharField(max_length=50, default="")
     is_deleted = models.BooleanField(default=False)
 
+    def get_absolute_url(self):
+        return reverse('litter', kwargs={"pk": self.pk})
+
 
 class Vaccination(models.Model):
 
