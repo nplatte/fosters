@@ -5,23 +5,12 @@ from selenium.webdriver.firefox.options import Options
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
 from litter.models import Cat
+from functional_tests.foster_helper import TestHelper
 
 
-class TestCats(StaticLiveServerTestCase):
+class TestCats(TestHelper):
 
     fixtures = [ "cats" ]
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        options = Options()
-        options.add_argument("--headless")
-        cls.browser = webdriver.Firefox(options=options)        
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.browser.close()
-        return super().tearDownClass()
 
     def setUp(self):
         self.browser.delete_all_cookies()
@@ -156,5 +145,38 @@ class TestCats(StaticLiveServerTestCase):
         new_count = self.browser.find_elements(By.CLASS_NAME, "cat")
         self.assertEqual(len(new_count), len(old_count))
 
-    def test_can_add_event_to_cat(self):
-        self.fail("finish the test")
+
+class TestEvent(StaticLiveServerTestCase):
+
+    fixtures = [ "cats" ]
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        options = Options()
+        options.add_argument("--headless")
+        cls.browser = webdriver.Firefox(options=options)        
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.browser.close()
+        return super().tearDownClass()
+
+    def setUp(self):
+        self.browser.delete_all_cookies()
+        self.valid_data = {
+            "weight": "123", "meds": "Clav, Vycodin",
+            "condition": "is super cute", "cat": f"{Cat.objects.get(pk=1).pk}",
+        }
+        return super().setUp()
+
+    def tearDown(self):
+        return super().tearDown()
+
+    def test_add_event(self):
+        # the user logs into the websie
+        pass
+
+
+    def test_view_event(self):
+        pass
