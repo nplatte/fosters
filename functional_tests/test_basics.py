@@ -92,7 +92,46 @@ class TestCats(StaticLiveServerTestCase):
         self.fail("finish the test")
 
     def test_can_update_cat(self):
-        self.fail("finish the test")
+        edit_cat = Cat.objects.get(pk=1)
+        # the user logs into the site
+        self.browser.get(f'{self.live_server_url}{reverse('landing')}')
+        self.assertEqual(self.browser.title, "Home Page")
+        # they click the cats page
+        cats_link = self.browser.find_element(By.ID, "cats_link")
+        cats_link.click()
+        self.assertEqual(self.browser.title, "Cats")
+        old_count = self.browser.find_elements(By.CLASS_NAME, "cat")
+        # they click the edit cat link
+        cats_link = self.browser.find_element(By.ID, "edit_1_link")
+        cats_link.click()
+        self.assertEqual(self.browser.title, f"Edit {edit_cat.name}")
+        # they see the current information
+        cat_ids = [
+            ("cat_name", edit_cat.name), ("cat_dob", edit_cat.estimated_date_of_birth.strftime("%Y-%m-%d")), 
+            ("cat_microchip", f"{edit_cat.microchip} inserted on {edit_cat.microchip_inserted_on.strftime("%Y-%m-%d")}"),
+            ("cat_internal", edit_cat.internal_id), ("cat_gender", edit_cat.gender), ("cat_color", edit_cat.color),
+            ("cat_litter", str(edit_cat.litter))
+        ]
+        for id in cat_ids:
+            input = self.browser.find_element(By.ID, f"{id[0]}_input")
+            self.assertEqual(input.value, id[1])
+        # they make a change to the name
+        name_input = self.browser.find_element(By.ID, "cat_name_input")
+        name_input.clear()
+        name_input.send_keys("Hello Kitty")
+        # they save
+        submit = self.browser.find_element(By.ID, "submit_btn")
+        submit.click()
+        # they get redirected to the cats page
+        edited_cat = Cat.objects.get(pk=1)
+        self.assertEqual(self.browser.title, "Hello Kitty")
+        # they click the all cats link
+        cats_link = self.browser.find_element(By.ID, "cats_link")
+        cats_link.click()
+        self.assertEqual(self.browser.title, "Cats")
+        # they see the same number of cats
+        new_count = self.browser.find_elements(By.CLASS_NAME, "cat")
+        self.assertEqual(new_count, old_count)
 
     def test_can_add_event_to_cat(self):
         self.fail("finish the test")
