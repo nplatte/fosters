@@ -79,3 +79,11 @@ class TestEditCat(TestCase):
         response = self.client.post(self.url, self.data)
         self.assertRedirects(response, reverse("cat", kwargs={"pk": 1}))
 
+    def test_id_in_template(self):
+        response = self.client.get(self.url)
+        ids = [
+            "id_name", "id_estimated_date_of_birth", "id_microchip"
+        ]
+        for id in ids:
+            self.assertContains(response, f'id="{id}"')
+
