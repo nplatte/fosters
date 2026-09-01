@@ -25,14 +25,9 @@ class TestCats(TestHelper):
 
     def test_can_add_cat(self):
         # the user logs into the website
-        self.browser.get(f'{self.live_server_url}{reverse('landing')}')
-        # the user is on the home page
-        self.assertEqual(self.browser.title, "Home Page")
+        self.log_in_to_site()
         # they click the view cats page
-        cats_link = self.browser.find_element(By.ID, "cats_link")
-        cats_link.click()
-        # they see some cats
-        self.assertEqual(self.browser.title, "Cats")
+        self.navigate_to_cats_page()
         old_count = len(self.browser.find_elements(By.CLASS_NAME, "cat"))
         # they click the add cat button
         create_cat_link = self.browser.find_element(By.ID, "create_cat_link")
@@ -48,15 +43,13 @@ class TestCats(TestHelper):
         submit_btn.click()
         self.assertEqual(self.browser.title, f"{self.valid_data['name']}")
         # they click cats and see the new cat added
-        cats_link = self.browser.find_element(By.ID, "cats_link")
-        cats_link.click()
+        self.navigate_to_cats_page()
         new_count = len(self.browser.find_elements(By.CLASS_NAME, "cat"))
         self.assertGreater(new_count, old_count)
 
     def test_can_view_cat(self):
         # the user logs in
-        self.browser.get(f'{self.live_server_url}{reverse('landing')}')
-        self.assertEqual(self.browser.title, "Home Page")
+        self.log_in_to_site()
         # they click the cats button
         cats_link = self.browser.find_element(By.ID, "cats_link")
         cats_link.click()
@@ -79,13 +72,9 @@ class TestCats(TestHelper):
 
     def test_can_delete_cat(self):
         # the user logs into the server
-        self.browser.get(f'{self.live_server_url}{reverse('landing')}')
-        # the user is on the home page
-        self.assertEqual(self.browser.title, "Home Page")
+        self.log_in_to_site()
         # they click the view cats page
-        cats_link = self.browser.find_element(By.ID, "cats_link")
-        cats_link.click()
-        self.assertEqual(self.browser.title, "Cats")
+        self.navigate_to_cats_page()
         # they see a cat
         old_count = len(self.browser.find_elements(By.CLASS_NAME, "cat"))
         self.assertGreater(old_count, 0)
@@ -107,12 +96,9 @@ class TestCats(TestHelper):
     def test_can_update_cat(self):
         edit_cat = Cat.objects.get(pk=1)
         # the user logs into the site
-        self.browser.get(f'{self.live_server_url}{reverse('landing')}')
-        self.assertEqual(self.browser.title, "Home Page")
+        self.log_in_to_site()
         # they click the cats page
-        cats_link = self.browser.find_element(By.ID, "cats_link")
-        cats_link.click()
-        self.assertEqual(self.browser.title, "Cats")
+        self.navigate_to_cats_page()
         old_count = self.browser.find_elements(By.CLASS_NAME, "cat")
         # they click the edit cat link
         cats_link = self.browser.find_element(By.ID, "edit_1_link")
@@ -138,9 +124,7 @@ class TestCats(TestHelper):
         edited_cat = Cat.objects.get(pk=1)
         self.assertEqual(self.browser.title, "Hello Kitty")
         # they click the all cats link
-        cats_link = self.browser.find_element(By.ID, "cats_link")
-        cats_link.click()
-        self.assertEqual(self.browser.title, "Cats")
+        self.navigate_to_cats_page()
         # they see the same number of cats
         new_count = self.browser.find_elements(By.CLASS_NAME, "cat")
         self.assertEqual(len(new_count), len(old_count))
