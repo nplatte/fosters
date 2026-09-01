@@ -28,23 +28,19 @@ class TestCats(TestHelper):
         self.log_in_to_site()
         # they click the view cats page
         self.navigate_to_cats_page()
-        old_count = len(self.browser.find_elements(By.CLASS_NAME, "cat"))
+        old_count = self.count_elements_by_class("cat")
         # they click the add cat button
         create_cat_link = self.browser.find_element(By.ID, "create_cat_link")
         create_cat_link.click()
         # they are taken to the add cat page
         self.assertEqual(self.browser.title, "Add Cat")
         # they enter in the cat inforamtion
-        for field_name, data in self.valid_data.items():
-            input = self.browser.find_element(By.ID, f'id_{field_name}')
-            input.send_keys(data)
-        # they click enter and are taken to the cat's page
-        submit_btn = self.browser.find_element(By.ID, "submit_btn")
-        submit_btn.click()
+        self.fill_in_form_by_ids(self.valid_data)
+        # they are back at the Cat's page
         self.assertEqual(self.browser.title, f"{self.valid_data['name']}")
         # they click cats and see the new cat added
         self.navigate_to_cats_page()
-        new_count = len(self.browser.find_elements(By.CLASS_NAME, "cat"))
+        new_count = self.count_elements_by_class("cat")
         self.assertGreater(new_count, old_count)
 
     def test_can_view_cat(self):
@@ -99,7 +95,7 @@ class TestCats(TestHelper):
         self.log_in_to_site()
         # they click the cats page
         self.navigate_to_cats_page()
-        old_count = self.browser.find_elements(By.CLASS_NAME, "cat")
+        old_count = self.count_elements_by_class("cat")
         # they click the edit cat link
         cats_link = self.browser.find_element(By.ID, "edit_1_link")
         cats_link.click()
@@ -126,8 +122,8 @@ class TestCats(TestHelper):
         # they click the all cats link
         self.navigate_to_cats_page()
         # they see the same number of cats
-        new_count = self.browser.find_elements(By.CLASS_NAME, "cat")
-        self.assertEqual(len(new_count), len(old_count))
+        new_count = self.count_elements_by_class("cat")
+        self.assertEqual(new_count, old_count)
 
 
 class TestEvent(StaticLiveServerTestCase):

@@ -24,6 +24,16 @@ class TestHelper(StaticLiveServerTestCase):
         self.assertPageHasID(id_name)
         return self.browser.find_element(By.ID, id_name)
 
+    def count_elements_by_class(self, class_name):
+        return len(self.browser.find_elements(By.CLASS_NAME, class_name))
+
+    def fill_in_form_by_ids(self, data_by_id):
+        for id, data in data_by_id.items():
+            input_element = self.findElementByID(f"id_{id}")
+            input_element.send_keys(data)
+        submit_btn = self.findElementByID("submit_btn")
+        submit_btn.click()
+
     def assertPageHasID(self, id_name):
         count = len(self.browser.find_elements(By.ID, id_name))
         self.assertEqual(count, 1)
