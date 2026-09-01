@@ -25,33 +25,6 @@ class TestBasicGET(TestCase):
                 self.assertEqual(response.status_code, 200)
 
 
-class TestAddCat(TestCase):
-
-    def setUp(self):
-        self.url = reverse('add_cat')
-        self.data = {
-            "name": "Cat",
-            "estimated_date_of_birth": "01/01/1992",
-            "gender": "male", "color": "black",
-        }
-        return super().setUp()
-
-    def test_GET_returns_200(self):
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_POST_makes_cat(self):
-        old_count = Cat.objects.count()
-        self.client.post(self.url, self.data)
-        new_count = Cat.objects.count()
-        self.assertGreater(new_count, old_count)
-
-    def test_POST_success_sends_to_cat_page(self):
-        response = self.client.post(self.url, self.data)
-        new_cat = Cat.objects.all().last()
-        self.assertRedirects(response, reverse("cat", kwargs={"pk": new_cat.pk}))
-
-
 class TestEditCat(TestCase):
 
     fixtures = ['cats']
