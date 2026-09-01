@@ -7,7 +7,7 @@
 <div class="cat">
     <h1>{{ cat.name }}</h1>
     <label>Litter: </label><p>{{ cat.litter }}</p>
-    <a href="{{ cat.get_absolute_url }}">View Cat</a>    
+    <a href="{{ cat.get_absolute_url }}" id="cat_{{ cat.pk }}_link">View Cat</a>    
 </div>
 
 {% endfor %}

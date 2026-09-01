@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="base_info">
-    <h1>{{ cat.name }}</h1>
-    <label>DoB: </label><p>{{ cat.estimated_date_of_birth }}</p>
-    <label>Microchip: </label><p>{{ cat.microchip }} inserted on {{ cat.microchip_inserted_on }}</p>
-    <label>Internal ID: </label><p>{{ cat.internal_id }}</p>
-    <label>Gender: </label><p>{{ cat.gender }}</p>
-    <label>Color: </label><p>{{ cat.color }}</p>
-    <label>Litter: </label><p>{{ cat.litter }}</p>
+    <h1 id="cat_name">{{ cat.name }}</h1>
+    <label>DoB: </label><p id="cat_dob">{{ cat.estimated_date_of_birth|date:"Y-m-d" }}</p>
+    <label>Microchip: </label><p id="cat_microchip">{{ cat.microchip }} inserted on {{ cat.microchip_inserted_on|date:"Y-m-d" }}</p>
+    <label>Internal ID: </label><p id="cat_internal">{{ cat.internal_id }}</p>
+    <label>Gender: </label><p id="cat_gender">{{ cat.gender }}</p>
+    <label>Color: </label><p id="cat_color">{{ cat.color }}</p>
+    <label>Litter: </label><p id="cat_litter">{{ cat.litter }}</p>
 </div>
 {% endblock %}

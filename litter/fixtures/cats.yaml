@@ -2,3 +2,9 @@
   pk: 1
   fields:
     name: "Test Cat"
+    estimated_date_of_birth: 2024-01-15
+    microchip: "1w2e3e"
+    microchip_inserted_on: 2024-01-20
+    internal_id: "1q222345"
+    gender: male
+    color: red
