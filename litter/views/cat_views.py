@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import CreateView, UpdateView, ListView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 from litter.models import Cat
+from django.urls import reverse_lazy
 
 
 class LandingView(View):
@@ -41,4 +42,9 @@ class UpdateCatView(UpdateView):
         'is_deleted'
         ]
 
+class DeleteCatView(DeleteView):
+
+    template_name = "litter/cat/delete.html"
+    success_url = reverse_lazy('all_cats')
+    model = Cat
 
