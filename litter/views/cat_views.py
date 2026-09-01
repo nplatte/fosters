@@ -31,6 +31,7 @@ class AddCatView(CreateView):
     fields = ['name', 'estimated_date_of_birth', 'gender', 'color', 'litter']
     template_name = 'litter/cat/add.html'
 
+
 class UpdateCatView(UpdateView):
 
     template_name = "litter/cat/edit.html"
@@ -41,6 +42,7 @@ class UpdateCatView(UpdateView):
         'gender', 'color', 'litter',
         'is_deleted'
         ]
+
 
 class DeleteCatView(DeleteView):
 
