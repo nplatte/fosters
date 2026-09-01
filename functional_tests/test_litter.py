@@ -25,16 +25,16 @@ class TestLitter(StaticLiveServerTestCase):
         return super().tearDown()
 
     def test_can_add_litter(self):
-        pass
+        self.fail("finish the test")
 
     def test_can_add_cat_to_litter(self):
-        pass
+        self.fail("finish the test")
 
     def test_can_update_litter_info(self):
-        pass
+        self.fail("finish the test")
 
     def test_can_remove_cats_in_litter(self):
-        pass
+        self.fail("finish the test")
 
     def test_can_add_events_to_cats_in_litter(self):
-        pass
+        self.fail("finish the test")

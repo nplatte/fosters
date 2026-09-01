@@ -48,7 +48,7 @@ class TestCats(StaticLiveServerTestCase):
         self.assertEqual(self.browser.title, "Add Cat")
         # they enter in the cat inforamtion
         for field_name, data in self.valid_data.items():
-            input = self.browser.find_element(By.ID, f'{field_name}_id')
+            input = self.browser.find_element(By.ID, f'id_{field_name}')
             input.send_keys(data)
         # they click enter and are taken to the cat's page
         submit_btn = self.browser.find_element(By.ID, "submit_btn")
@@ -61,13 +61,13 @@ class TestCats(StaticLiveServerTestCase):
         self.assertGreater(new_count, old_count)
 
     def test_can_view_cat(self):
-        pass
+        self.fail("finish the test")
 
     def test_can_delete_cat(self):
-        pass
+        self.fail("finish the test")
 
     def test_can_update_cat(self):
-        pass
+        self.fail("finish the test")
 
     def test_can_add_event_to_cat(self):
-        pass
+        self.fail("finish the test")
