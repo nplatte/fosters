@@ -4,8 +4,11 @@
 
 {% block content %}
 {% for cat in object_list %}
-<h1>{{ cat.name }}</h1>
-<label>Litter: </label><p>{{ cat.litter }}</p>
-<a href="{{ cat.get_absolute_url }}">View Cat</a>
+<div class="cat">
+    <h1>{{ cat.name }}</h1>
+    <label>Litter: </label><p>{{ cat.litter }}</p>
+    <a href="{{ cat.get_absolute_url }}">View Cat</a>    
+</div>
+
 {% endfor %}
 {% endblock %}
