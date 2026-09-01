@@ -1,21 +1,33 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
 
 
 class TestCats(StaticLiveServerTestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        options = Options()
+        options.add_argument("--headless")
+        cls.browser = webdriver.Firefox(options=options)        
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.browser.close()
+        return super().tearDownClass()
+
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        self.browser.delete_all_cookies()
         self.valid_data = {
             "name": "Wiggles"
         }
         return super().setUp()
 
     def tearDown(self):
-        self.browser.close()
         return super().tearDown()
 
     def test_can_add_cat(self):
