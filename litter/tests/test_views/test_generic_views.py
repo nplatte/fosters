@@ -1,33 +1,13 @@
 from django.test import TestCase
-from dataclasses import dataclass
-from django.db import models
-from django.urls import reverse
-from litter.models import Cat
+from litter.tests.test_views.build_test_cases import build_add_view_test_cases
 
-
-@dataclass
-class AddViewTestCase:
-    name: str
-    url: str
-    model: type[models.Model]
-    valid_data: dict
-    redirect_url: str
 
 class TestAddViews(TestCase):
 
     fixtures = ['cats']
 
     def setUp(self):
-        cat_test_case = AddViewTestCase(
-            name="Add Cat Test",
-            url = reverse('add_cat'),
-            model=Cat,
-            valid_data={"name": "Cat",
-                "estimated_date_of_birth": "01/01/1992",
-                "gender": "male", "color": "black",},
-            redirect_url=reverse("cat", kwargs={"pk": Cat.objects.count()+1}))
-        
-        self.test_cases = [ cat_test_case, ]
+        self.test_cases = build_add_view_test_cases()
         return super().setUp()
     
     def test_GET_returns_200(self):
