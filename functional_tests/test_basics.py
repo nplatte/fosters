@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
+from time import sleep
 
 
 class TestCats(StaticLiveServerTestCase):
@@ -53,6 +54,7 @@ class TestCats(StaticLiveServerTestCase):
         # they click enter and are taken to the cat's page
         submit_btn = self.browser.find_element(By.ID, "submit_btn")
         submit_btn.click()
+        sleep(1)
         self.assertEqual(self.browser.title, f"{self.valid_data['name']}")
         # they click cats and see the new cat added
         cats_link = self.browser.find_element(By.ID, "cats_link")
