@@ -89,7 +89,30 @@ class TestCats(StaticLiveServerTestCase):
         # they log out
 
     def test_can_delete_cat(self):
-        self.fail("finish the test")
+        # the user logs into the server
+        self.browser.get(f'{self.live_server_url}{reverse('landing')}')
+        # the user is on the home page
+        self.assertEqual(self.browser.title, "Home Page")
+        # they click the view cats page
+        cats_link = self.browser.find_element(By.ID, "cats_link")
+        cats_link.click()
+        self.assertEqual(self.browser.title, "Cats")
+        # they see a cat
+        old_count = len(self.browser.find_elements(By.CLASS_NAME, "cat"))
+        self.assertGreater(old_count, 0)
+        # they want to delete the cat
+        test_cat = Cat.objects.get(pk=1)
+        delete_link = self.browser.find_element(By.ID, f"cat_{test_cat.pk}_delete")
+        # they click the delete link
+        delete_link.click()
+        # then click confirm
+        confirm = self.browser.find_element(By.ID, "confirm_delete_btn")
+        confirm.click()
+        # they are returned to the cats page
+        self.assertEqual(self.browser.title, "Cats")
+        # they see one less cat
+        new_count = len(self.browser.find_element(By.CLASS_NAME, "cat"))
+        self.assertLess(new_count, old_count)
 
     def test_can_update_cat(self):
         edit_cat = Cat.objects.get(pk=1)
