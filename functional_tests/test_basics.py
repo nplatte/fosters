@@ -102,16 +102,17 @@ class TestCats(StaticLiveServerTestCase):
         self.assertGreater(old_count, 0)
         # they want to delete the cat
         test_cat = Cat.objects.get(pk=1)
-        delete_link = self.browser.find_element(By.ID, f"cat_{test_cat.pk}_delete")
+        delete_link = self.browser.find_element(By.ID, f"delete_{test_cat.pk}_link")
         # they click the delete link
         delete_link.click()
+        self.assertEqual(self.browser.title, f"Delete {test_cat.name}")
         # then click confirm
         confirm = self.browser.find_element(By.ID, "confirm_delete_btn")
         confirm.click()
         # they are returned to the cats page
         self.assertEqual(self.browser.title, "Cats")
         # they see one less cat
-        new_count = len(self.browser.find_element(By.CLASS_NAME, "cat"))
+        new_count = len(self.browser.find_elements(By.CLASS_NAME, "cat"))
         self.assertLess(new_count, old_count)
 
     def test_can_update_cat(self):
