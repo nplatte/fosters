@@ -181,4 +181,30 @@ class TestEvent(TestHelper):
             self.assertEqual(element.text, data)
 
     def test_edit_event(self):
-        pass
+        cat = Cat.objects.get(pk=1)
+        # the user logs into the website
+        self.log_in_to_site()
+        # the user goes to the all cats page
+        self.navigate_to_cats_page()
+        # the user clicks on the cat with an event
+        self.find_and_click(f"view_{cat.pk}_link")
+        self.assertTitleEquals(cat.name)
+        # they see events
+        count = self.count_elements_by_class("event")
+        self.assertGreater(count, 0)
+        event_weight = self.findElementByID("event_1_weight")
+        self.assertNotEqual(event_weight.text, "200 grams")
+        # they click the event edit button
+        self.find_and_click("event_1_edit")
+        self.assertTitleEquals("Edit Event")
+        # they update the weight
+        data = {"weight": "200"}
+        self.fill_in_form_by_ids(data)
+        # they are taken to the cat page again
+        self.assertTitleEquals(cat.name)
+        # they see the event weight is updated
+        event_weight = self.findElementByID("event_1_weight")
+        self.assertEqual(event_weight.text, "200 grams")
+
+
+
