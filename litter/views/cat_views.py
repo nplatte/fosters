@@ -29,7 +29,12 @@ class AddCatView(CreateView):
 
     model = Cat
     fields = ['name', 'estimated_date_of_birth', 'gender', 'color', 'litter']
-    template_name = 'litter/cat/add.html'
+    template_name = 'litter/generic/add.html'
+
+    def get_context_data(self, **kwargs):
+        return {
+            "title": "Add Event"
+        }
 
 
 class UpdateCatView(UpdateView):

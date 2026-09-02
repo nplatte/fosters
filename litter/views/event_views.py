@@ -4,6 +4,11 @@ from litter.models import *
 
 class AddEventView(CreateView):
 
-    model = Litter
-    fields = ['name']
-    template_name = 'litter/litter/add.html'
+    model = Event
+    fields = ['medications', 'weight', 'condition', 'cat']
+    template_name = 'litter/generic/add.html'
+
+    def get_context_data(self, **kwargs):
+        return {
+            "title": "Add Event"
+        }

@@ -34,8 +34,8 @@ class Event(models.Model):
     condition = models.TextField(null=True, blank=True)
     cat = models.ForeignKey(Cat, on_delete=models.CASCADE)
 
-
-
+    def get_absolute_url(self):
+        return self.cat.get_absolute_url()
 
 
 
