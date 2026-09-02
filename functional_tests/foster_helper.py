@@ -36,7 +36,7 @@ class TestHelper(StaticLiveServerTestCase):
 
     def assertPageHasID(self, id_name):
         count = len(self.browser.find_elements(By.ID, id_name))
-        self.assertEqual(count, 1)
+        self.assertEqual(count, 1, f"missing ID {id_name}")
 
     def assertTitleEquals(self, title):
         self.assertEqual(self.browser.title, title)
@@ -49,4 +49,8 @@ class TestHelper(StaticLiveServerTestCase):
         cats_link = self.findElementByID('cats_link')
         cats_link.click()
         self.assertTitleEquals("Cats")
+
+    def find_and_click(self, id):
+        element = self.findElementByID(id)
+        element.click()
 

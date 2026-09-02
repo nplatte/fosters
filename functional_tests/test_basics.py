@@ -50,9 +50,8 @@ class TestCats(TestHelper):
         cats_link = self.browser.find_element(By.ID, "cats_link")
         cats_link.click()
         # they click the cat they want to see
-        cat_link = self.browser.find_element(By.ID, "cat_1_link")
-        cat_link.click()
         test_cat = Cat.objects.get(pk=1)
+        self.find_and_click(f"view_{test_cat.pk}_link")
         self.assertEqual(self.browser.title, test_cat.name)
         # they see the cats information
         cat_ids = [
@@ -126,21 +125,9 @@ class TestCats(TestHelper):
         self.assertEqual(new_count, old_count)
 
 
-class TestEvent(StaticLiveServerTestCase):
+class TestEvent(TestHelper):
 
     fixtures = [ "cats" ]
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        options = Options()
-        options.add_argument("--headless")
-        cls.browser = webdriver.Firefox(options=options)        
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.browser.close()
-        return super().tearDownClass()
 
     def setUp(self):
         self.browser.delete_all_cookies()
@@ -154,8 +141,26 @@ class TestEvent(StaticLiveServerTestCase):
         return super().tearDown()
 
     def test_add_event(self):
-        # the user logs into the websie
-        pass
+        # the user logs into the site
+        self.log_in_to_site()
+        # they want to add an event to a cat
+        # they go to the cat page
+        self.navigate_to_cats_page()
+        test_cat = Cat.objects.get(pk=1)
+        self.find_and_click(f"view_{test_cat.pk}_link")
+        self.assertEqual(self.browser.title, test_cat.name)
+        old_count = self.count_elements_by_class("event")
+        # they click add event
+        self.find_and_click("add_event")
+        self.assertEqual("Create Event")
+        # they enter the event info and hit submit
+        self.fill_in_form_by_ids(self.valid_data)
+        # they are taken to the cat page
+        self.assertEqual(self.browser.title, test_cat.name)
+        # they see the new event
+        new_count = self.count_elements_by_class("event")
+        self.assertGreater(new_count, old_count)
+        # they log off
 
 
     def test_view_event(self):
