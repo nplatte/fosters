@@ -13,7 +13,11 @@
     <label>Litter: </label><p id="cat_litter">{{ cat.litter }}</p>
 </div>
 {% for event in cat.event_set.all %}
-<div class="event"></div>
+<div class="event">
+    <p id="event_{{ event.pk }}_meds">{{ event.medications }}</p>
+    <p id="event_{{ event.pk }}_weight">{{ event.weight }} grams</p>
+    <p id="event_{{ event.pk }}_condition">{{ event.condition }}</p>
+</div>
 {% endfor %}
 <a href="{% url 'add_event' %}" id="add_event"> Add Event</a>
 {% endblock %}

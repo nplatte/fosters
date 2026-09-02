@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from django.urls import reverse
-from litter.models import Cat
+from litter.models import Cat, Event
 from functional_tests.foster_helper import TestHelper
 
 
@@ -163,7 +163,22 @@ class TestEvent(TestHelper):
         # they log off
 
     def test_view_event(self):
-        pass
+        cat = Cat.objects.get(pk=1)
+        # the user logs into the website
+        self.log_in_to_site()
+        # the user goes to the all cats page
+        self.navigate_to_cats_page()
+        # the user clicks on the cat with an event
+        self.find_and_click(f"view_{cat.pk}_link")
+        # they see events
+        got = self.count_elements_by_class("event")
+        cat_events = Event.objects.filter(cat=cat)
+        self.assertEqual(len(cat_events), got)
+        # they see the events info
+        event = cat_events.first()
+        for field, data in {"meds":event.medications, "weight":f"{event.weight} grams", "condition":event.condition}.items():
+            element = self.findElementByID(f"event_{event.pk}_{field}")
+            self.assertEqual(element.text, data)
 
     def test_edit_event(self):
         pass
