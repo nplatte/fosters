@@ -27,6 +27,19 @@ class Litter(models.Model):
         return reverse('litter', kwargs={"pk": self.pk})
 
 
+class Event(models.Model):
+
+    medications = models.CharField(max_length=100, null=True, blank=True)
+    weight = models.IntegerField(null=True, blank=True)
+    condition = models.TextField(null=True, blank=True)
+    cat = models.ForeignKey(Cat, on_delete=models.CASCADE)
+
+
+
+
+
+
+
 class Vaccination(models.Model):
 
     name = models.CharField(max_length=50, default="")

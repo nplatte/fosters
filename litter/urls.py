@@ -1,6 +1,7 @@
 from django.urls import path, include
 from litter.views import cat_views as cat_views
 from litter.views import litter_views as litter_views
+from litter.views import event_views as event_views
 
 urlpatterns = [
     path("", cat_views.LandingView.as_view(), name='landing'),
@@ -15,4 +16,7 @@ urlpatterns = [
         path("add", litter_views.AddLitterView.as_view(), name='add_litter'),
         path("view/<int:pk>", litter_views.LitterView.as_view(), name='litter')
     ])),
+    path("event/", include([
+        path("add/", event_views.AddEventView.as_view(), name='add_event'), 
+    ]))
 ]
