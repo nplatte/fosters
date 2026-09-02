@@ -34,3 +34,23 @@ def build_add_view_test_cases():
     return [
         cat_test_case, event_test_case
     ]
+
+
+def build_edit_view_test_cases():
+    cat_test_case = AddViewTestCase(
+        name="Edit Cat Test",
+        url = reverse('edit_cat', kwargs={"pk": 1}),
+        model=Cat,
+        valid_data={"name": "CAT"},
+        redirect_url=reverse("cat", kwargs={"pk": Cat.objects.count()+1}))
+
+    event_test_case = AddViewTestCase(
+        name="Add Event Test",
+        url=reverse('edit_event', kwargs={"pk": 1}),
+        model=Event,
+        valid_data={"weight": "312", "condition": "super cute"},
+        redirect_url=reverse("cat", kwargs={"pk": Event.objects.count()+1}))
+    
+    return [
+        cat_test_case, event_test_case
+    ]
