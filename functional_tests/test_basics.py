@@ -127,7 +127,7 @@ class TestCats(TestHelper):
 
 class TestEvent(TestHelper):
 
-    fixtures = [ "cats" ]
+    fixtures = [ "cats", "events" ]
 
     def setUp(self):
         self.browser.delete_all_cookies()
@@ -162,6 +162,8 @@ class TestEvent(TestHelper):
         self.assertGreater(new_count, old_count)
         # they log off
 
-
     def test_view_event(self):
+        pass
+
+    def test_edit_event(self):
         pass

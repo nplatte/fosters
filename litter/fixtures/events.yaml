@@ -1,0 +1,7 @@
+- model: litter.event
+  pk: 1
+  fields:
+    medications: "T, B, C"
+    weight: 435
+    condition: "super duper healthy"
+    cat: 1
