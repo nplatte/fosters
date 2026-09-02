@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from django.db import models
 from django.urls import reverse
-from litter.models import Cat
+from litter.models import Cat, Event
 
 
 @dataclass
@@ -22,6 +22,15 @@ def build_add_view_test_cases():
             "estimated_date_of_birth": "01/01/1992",
             "gender": "male", "color": "black",},
         redirect_url=reverse("cat", kwargs={"pk": Cat.objects.count()+1}))
+
+    event_test_case = AddViewTestCase(
+        name="Add Event Test",
+        url=reverse('add_event'),
+        model=Event,
+        valid_data={"medications": "Clab, Blab, Rave",
+            "weight": "123", "condition": "super cute", "cat":f"{Cat.objects.count()+1}"},
+        redirect_url=reverse("cat", kwargs={"pk": Cat.objects.count()+1}))
+    
     return [
-        cat_test_case
+        cat_test_case, event_test_case
     ]

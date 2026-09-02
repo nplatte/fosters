@@ -152,7 +152,7 @@ class TestEvent(TestHelper):
         old_count = self.count_elements_by_class("event")
         # they click add event
         self.find_and_click("add_event")
-        self.assertEqual("Create Event")
+        self.assertEqual(self.browser.title, "Create Event")
         # they enter the event info and hit submit
         self.fill_in_form_by_ids(self.valid_data)
         # they are taken to the cat page
