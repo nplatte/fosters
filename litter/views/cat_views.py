@@ -32,14 +32,14 @@ class AddCatView(CreateView):
     template_name = 'litter/generic/add.html'
 
     def get_context_data(self, **kwargs):
-        return {
-            "title": "Add Cat"
-        }
+        context = super().get_context_data(**kwargs)
+        context['title'] = f"Add Cat"
+        return context
 
 
 class UpdateCatView(UpdateView):
 
-    template_name = "litter/cat/edit.html"
+    template_name = "litter/generic/edit.html"
     model = Cat
     fields = [
         'name', 'estimated_date_of_birth', 
@@ -47,6 +47,12 @@ class UpdateCatView(UpdateView):
         'gender', 'color', 'litter',
         'is_deleted'
         ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        obj = super().get_object()
+        context['title'] = f"Edit {obj.name}"
+        return context
 
 
 class DeleteCatView(DeleteView):

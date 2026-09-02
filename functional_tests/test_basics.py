@@ -132,7 +132,7 @@ class TestEvent(TestHelper):
     def setUp(self):
         self.browser.delete_all_cookies()
         self.valid_data = {
-            "weight": "123", "meds": "Clav, Vycodin",
+            "weight": "123", "medications": "Clav, Vycodin",
             "condition": "is super cute", "cat": f"{Cat.objects.get(pk=1).pk}",
         }
         return super().setUp()

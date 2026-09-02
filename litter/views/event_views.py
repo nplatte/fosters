@@ -9,6 +9,6 @@ class AddEventView(CreateView):
     template_name = 'litter/generic/add.html'
 
     def get_context_data(self, **kwargs):
-        return {
-            "title": "Add Event"
-        }
+        context = super().get_context_data(**kwargs)
+        context['title'] = f"Add Event"
+        return context
