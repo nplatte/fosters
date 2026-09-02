@@ -33,7 +33,7 @@ class AddCatView(CreateView):
 
     def get_context_data(self, **kwargs):
         return {
-            "title": "Add Event"
+            "title": "Add Cat"
         }
 
 
@@ -51,7 +51,12 @@ class UpdateCatView(UpdateView):
 
 class DeleteCatView(DeleteView):
 
-    template_name = "litter/cat/delete.html"
+    template_name = "litter/generic/delete.html"
     success_url = reverse_lazy('all_cats')
     model = Cat
+
+    def get_context_data(self, **kwargs):
+        return {
+            'title': f"Delete {kwargs['object'].name}"
+        }
 

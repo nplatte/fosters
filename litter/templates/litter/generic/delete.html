@@ -1,0 +1,14 @@
+{% extends 'litter/base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+
+<p>Are you sure you want to delete "{{ object }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" id="confirm_delete_btn">Confirm delete</button>
+    <a href="{% url 'all_cats' %}">Cancel</a>
+</form>
+{% endblock %}
