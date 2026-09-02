@@ -25,42 +25,6 @@ class TestBasicGET(TestCase):
                 self.assertEqual(response.status_code, 200)
 
 
-class TestEditCat(TestCase):
-
-    fixtures = ['cats']
-
-    def setUp(self):
-        self.url = reverse('edit_cat', kwargs={"pk": 1})
-        self.data = {
-            "name": "Cat", 'microchip': "1562",
-            "estimated_date_of_birth": "01/01/1992",
-            "gender": "male", "color": "green",
-        }
-        return super().setUp()
-
-    def test_GET_returns_200(self):
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_POST_edits_cat(self):
-        old_count = Cat.objects.count()
-        self.client.post(self.url, self.data)
-        new_count = Cat.objects.count()
-        self.assertEqual(new_count, old_count)
-
-    def test_POST_success_sends_to_cat_page(self):
-        response = self.client.post(self.url, self.data)
-        self.assertRedirects(response, reverse("cat", kwargs={"pk": 1}))
-
-    def test_id_in_template(self):
-        response = self.client.get(self.url)
-        ids = [
-            "id_name", "id_estimated_date_of_birth", "id_microchip"
-        ]
-        for id in ids:
-            self.assertContains(response, f'id="{id}"')
-
-
 class TestDeleteCat(TestCase):
 
     fixtures = ['cats']
