@@ -48,7 +48,7 @@ def build_edit_view_test_cases():
         name="Add Event Test",
         url=reverse('edit_event', kwargs={"pk": 1}),
         model=Event,
-        valid_data={"weight": "312", "condition": "super cute"},
+        valid_data={"weight": "312", "condition": "super cute", "cat": "1"},
         redirect_url=reverse("cat", kwargs={"pk": Event.objects.count()}))
     
     return [

@@ -34,6 +34,10 @@ class TestHelper(StaticLiveServerTestCase):
                 self._fill_in_select_widget(id, data)
             else:
                 input_element = self.findElementByID(f"id_{id}")
+                try:
+                    input_element.clear()
+                except:
+                    pass
                 input_element.send_keys(data)
         submit_btn = self.findElementByID("submit_btn")
         submit_btn.click()
