@@ -2,6 +2,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from selenium import webdriver
 from django.urls import reverse
 
@@ -29,10 +30,17 @@ class TestHelper(StaticLiveServerTestCase):
 
     def fill_in_form_by_ids(self, data_by_id):
         for id, data in data_by_id.items():
-            input_element = self.findElementByID(f"id_{id}")
-            input_element.send_keys(data)
+            if id == "cat":
+                self._fill_in_select_widget(id, data)
+            else:
+                input_element = self.findElementByID(f"id_{id}")
+                input_element.send_keys(data)
         submit_btn = self.findElementByID("submit_btn")
         submit_btn.click()
+
+    def _fill_in_select_widget(self, id, data):
+        element = Select(self.findElementByID(f"id_{id}"))
+        element.select_by_value(data)
 
     def assertPageHasID(self, id_name):
         count = len(self.browser.find_elements(By.ID, id_name))
