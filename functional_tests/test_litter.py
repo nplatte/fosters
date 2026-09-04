@@ -41,7 +41,7 @@ class TestLitter(TestHelper):
         self.navigate_to_litters_page()
         # they click on the update litter link by the litter they want to change
         self.find_and_click("update_1_link")
-        self.assertTitleEquals(f'Update {test_litter.name}')
+        self.assertTitleEquals(f'Edit {test_litter.name}')
         # they enter the new name
         self.fill_in_form_by_ids({"name": "Socks"})
         # they are taken to the litter's page

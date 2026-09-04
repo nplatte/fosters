@@ -35,5 +35,6 @@ class UpdateLitterView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = f"Update {kwargs['object'].name}"
+        obj = super().get_object()
+        context['title'] = f"Edit {obj.name}"
         return context
