@@ -1,4 +1,5 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -7,7 +8,7 @@ from selenium import webdriver
 from django.urls import reverse
 
 
-class TestHelper(StaticLiveServerTestCase):
+class TestHelper(LiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
