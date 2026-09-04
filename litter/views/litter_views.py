@@ -11,9 +11,9 @@ class AddLitterView(CreateView):
     success_url = reverse_lazy('litters')
 
     def get_context_data(self, **kwargs):
-        return {
-            "title": "Add Litter"
-        }
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Add Litter"
+        return context
 
 class AllLittersView(ListView):
 

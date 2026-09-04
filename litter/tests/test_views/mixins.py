@@ -1,13 +1,14 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from django.db import models
 
 @dataclass
 class ViewTestCase:
-    name: str
-    url: str
-    model: type[models.Model]
-    valid_data: dict
-    redirect_url: str
+    name: str = ""
+    url: str = ""
+    model: type[models.Model] = None
+    valid_data: dict = field(default_factory=dict)
+    redirect_url: str = ""
+    fields: list[str] = field(default_factory=list)
 
 
 class BaseTestCaseMixin:
@@ -34,6 +35,12 @@ class RedirectTestCaseMixin(BaseTestCaseMixin):
                 msg=f"Form was invalid: {form.errors.as_data()}"
             )
         self.assertRedirects(response, self.tc.redirect_url)
+
+    def test_ids_on_page(self):
+        response = self.client.get(self.tc.url)
+        html = response.content.decode()
+        for field_name in self.tc.fields:
+            self.assertIn(f"id_{field_name}", html)
 
 
 class CreateViewTestCaseMixin(RedirectTestCaseMixin):

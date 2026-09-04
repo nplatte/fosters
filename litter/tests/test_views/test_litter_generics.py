@@ -10,9 +10,6 @@ class TestAllLittersView(BaseTestCaseMixin, TestCase):
         return ViewTestCase(
             name="All Litters Test",
             url=reverse('litters'),
-            model=None,
-            valid_data={},
-            redirect_url=None
         )
 
 class TestAddLitterView(CreateViewTestCaseMixin, TestCase):
@@ -23,5 +20,6 @@ class TestAddLitterView(CreateViewTestCaseMixin, TestCase):
             url=reverse('add_litter'),
             model=Litter,
             valid_data={"name": "test 123"},
-            redirect_url=reverse('litters')
+            redirect_url=reverse('litters'),
+            fields=['name']
         )
