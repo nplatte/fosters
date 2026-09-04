@@ -10,7 +10,7 @@ class AddLitterView(CreateView):
 
     def get_context_data(self, **kwargs):
         return {
-            "title": "Add Event"
+            "title": "Add Litter"
         }
 
 class AllLittersView(ListView):

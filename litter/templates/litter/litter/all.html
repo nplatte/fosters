@@ -1,0 +1,12 @@
+{% extends 'litter/base.html' %}
+
+{% block title %} Litters {% endblock %}
+
+{% block content %}
+{% for cat in object_list %}
+<div class="cat">
+</div>
+
+{% endfor %}
+<a href="{% url 'add_litter' %}" id="add_link">Add Litter</a>
+{% endblock %}
