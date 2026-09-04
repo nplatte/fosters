@@ -35,5 +35,5 @@ class DeleteEventView(DeleteView):
 
     def get_context_data(self, **kwargs):
         return {
-            'title': f"Delete {kwargs['object'].name}"
+            'title': f"Delete Event"
         }
