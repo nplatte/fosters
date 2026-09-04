@@ -1,0 +1,81 @@
+/* ===================================================
+   Design tokens — warm & friendly, light mode, SaaS
+   Import this file first on every page. Never hardcode
+   a color, radius, or spacing value outside this file —
+   reference the variable instead, so a change here
+   updates every page at once.
+   =================================================== */
+
+:root {
+  /* ---- Color: base ---- */
+  --color-bg:            #FBF7F1;  /* warm ivory page background */
+  --color-surface:       #FFFFFF;  /* cards, inputs, modals */
+  --color-surface-sunk:  #F3EDE3;  /* subtle wells, table stripes */
+  --color-border:        #E6DDD1;
+
+  /* ---- Color: text ---- */
+  --color-text:           #3A2E27;  /* warm near-black, not pure #000 */
+  --color-text-secondary: #6B5D52;
+  --color-text-muted:     #9C8F82;
+  --color-text-on-primary:#FFFFFF;
+
+  /* ---- Color: brand ---- */
+  --color-primary:       #D9A441;  /* warm gold — primary actions */
+  --color-primary-hover: #C08F31;
+  --color-primary-active:#A87A28;
+  --color-primary-soft:  #F6E9CC;  /* tints/badges/backgrounds */
+
+  --color-accent:        #4E7C6E;  /* muted forest teal — secondary brand color */
+  --color-accent-hover:  #3E6459;
+  --color-accent-soft:   #DCEAE5;
+
+  /* ---- Color: feedback ---- */
+  --color-success:      #6E9B5E;
+  --color-success-soft: #E5EEE0;
+  --color-warning:      #D97706;
+  --color-warning-soft: #FBEBD6;
+  --color-error:        #C0554D;
+  --color-error-soft:   #F7E3E1;
+
+  /* ---- Shape ---- */
+  --radius-sm:  6px;   /* inputs, small buttons, tags */
+  --radius-md:  10px;  /* cards, buttons, dropdowns */
+  --radius-lg:  16px;  /* modals, large panels, hero images */
+  --radius-full: 999px; /* pills, avatars */
+
+  /* ---- Elevation ---- */
+  --shadow-sm: 0 1px 2px rgba(58, 46, 39, 0.06);
+  --shadow-md: 0 4px 12px rgba(58, 46, 39, 0.08);
+  --shadow-lg: 0 12px 32px rgba(58, 46, 39, 0.12);
+
+  /* ---- Spacing scale ---- */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* ---- Type ---- */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --text-xs:   0.8125rem;
+  --text-sm:   0.9375rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.375rem;
+  --text-2xl:  1.75rem;
+  --text-3xl:  2.5rem;
+  --text-4xl:  3.25rem;
+
+  --leading-tight:  1.2;
+  --leading-normal: 1.5;
+  --leading-loose:  1.7;
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+}

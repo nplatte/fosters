@@ -1,6 +1,11 @@
-<nav>
+<nav class="navbar">
   <a href="{% url 'landing' %}">Home</a>
-  <a href="{% url 'read_cats' %}" id="cats_link">Cats</a>
-  <a href="{% url 'create_cat' %}" id="create_cat_link">New Cat</a>
+  <div class="dropdown">
+      <button class="dropbtn">Dropdown<i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="{% url 'read_cats' %}" id="cats_link">Cats</a>
+        <a href="{% url 'create_cat' %}" id="create_cat_link">New Cat</a>        
+    </div>
+  </div>
   <a href="{% url 'read_litters' %}" id="litters_link">Litters</a>
 </nav>
