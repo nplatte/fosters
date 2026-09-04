@@ -34,7 +34,22 @@ class TestLitter(TestHelper):
         self.fail("finish the test")
 
     def test_can_update_litter(self):
-        self.fail("finish the test")
+        test_litter = Litter.objects.get(pk=1)
+        # the user logs into the site
+        self.log_in_to_site()
+        # the user goes to the litters page
+        self.navigate_to_litters_page()
+        # they click on the update litter link by the litter they want to change
+        self.find_and_click("litter_1_update")
+        self.assertTitleEquals(f'Update {test_litter.name}')
+        # they enter the new name
+        self.fill_in_form_by_ids({"name": "Socks"})
+        # they are taken to the litter's page
+        test_litter = Litter.objects.get(pk=1)
+        self.assertTitleEquals(test_litter.name)
+        # they see the update
+        litter_name = self.findElementByID("litter_name")
+        self.assertEqual(litter_name.text, test_litter.name)
 
     def test_user_can_view_litter(self):
         test_litter = Litter.objects.get(pk=1)
