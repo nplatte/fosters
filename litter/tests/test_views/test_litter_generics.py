@@ -32,3 +32,16 @@ class TestAddLitterView(CreateViewTestCaseMixin, TestCase):
             redirect_url=reverse('litters'),
             fields=['name']
         )
+
+
+class TestUpdateLitterView(UpdateViewTestCaseMixin, TestCase):
+
+    def get_test_case(self):
+        return ViewTestCase(
+            name="Edit Litters Test",
+            url=reverse('update_litter', kwargs={"pk": 1}),
+            model=Litter,
+            valid_data={"name": "test 123"},
+            redirect_url=reverse('litter', kwargs={"pk": 1}),
+            fields=['name']
+        )

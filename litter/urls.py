@@ -15,7 +15,8 @@ urlpatterns = [
     path("litter/", include([
         path("add", litter_views.AddLitterView.as_view(), name='add_litter'),
         path("view/<int:pk>", litter_views.LitterView.as_view(), name='litter'),
-        path("view/all", litter_views.AllLittersView.as_view(), name='litters')
+        path("view/all", litter_views.AllLittersView.as_view(), name='litters'),
+        path("edit/<int:pk>", litter_views.UpdateLitterView.as_view(), name='update_litter')
     ])),
     path("event/", include([
         path("add/", event_views.AddEventView.as_view(), name='add_event'), 

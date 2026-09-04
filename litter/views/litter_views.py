@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from litter.models import *
 from django.urls import reverse_lazy
 
@@ -25,3 +25,10 @@ class LitterView(DetailView):
 
     model = Litter
     template_name = 'litter/litter/detail.html'
+
+
+class UpdateLitterView(UpdateView):
+
+    model = Litter
+    fields = ["name"]
+    template_name = 'litter/generic/edit.html'
