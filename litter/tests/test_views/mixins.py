@@ -27,6 +27,12 @@ class RedirectTestCaseMixin(BaseTestCaseMixin):
 
     def test_POST_success_redirect_to_page(self):
         response = self.client.post(self.tc.url, self.tc.valid_data)
+        if response.status_code == 200:
+            form = response.context['form']
+            self.assertTrue(
+                form.is_valid(),
+                msg=f"Form was invalid: {form.errors.as_data()}"
+            )
         self.assertRedirects(response, self.tc.redirect_url)
 
 
