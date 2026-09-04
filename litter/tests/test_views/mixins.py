@@ -1,3 +1,13 @@
+from dataclasses import dataclass
+from django.db import models
+
+@dataclass
+class ViewTestCase:
+    name: str
+    url: str
+    model: type[models.Model]
+    valid_data: dict
+    redirect_url: str
 
 
 class BaseTestCaseMixin:
@@ -7,6 +17,7 @@ class BaseTestCaseMixin:
 
     def setUp(self):
         self.tc = self.get_test_case()
+        return super().setUp()
 
     def test_GET_returns_200(self):
         response = self.client.get(self.tc.url)
@@ -23,7 +34,7 @@ class CreateViewTestCaseMixin(RedirectTestCaseMixin):
 
     def test_POST_makes_model(self):
         old_count = self.tc.model.objects.count()
-        response = self.client.post(self.tc.url, self.tc.valid_data)
+        self.client.post(self.tc.url, self.tc.valid_data)
         new_count = self.tc.model.objects.count()
         self.assertGreater(new_count, old_count)
 
@@ -41,6 +52,6 @@ class DeleteViewTestCaseMixin(RedirectTestCaseMixin):
 
     def test_POST_deletes_model(self):
         old_count = self.tc.model.objects.count()
-        self.client.post(self.tc.url, data=self.tc.valid_data)
+        self.client.post(self.tc.url, self.tc.valid_data)
         new_count = self.tc.model.objects.count()
         self.assertLess(new_count, old_count)
