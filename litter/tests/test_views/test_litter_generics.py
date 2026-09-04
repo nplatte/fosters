@@ -45,3 +45,14 @@ class TestUpdateLitterView(UpdateViewTestCaseMixin, TestCase):
             redirect_url=reverse('litter', kwargs={"pk": 1}),
             fields=['name']
         )
+
+class TestDeleteLitterView(DeleteViewTestCaseMixin, TestCase):
+
+    def get_test_case(self):
+        return ViewTestCase(
+        name="Delete Litter",
+        url=reverse('delete_litter', kwargs={'pk': Litter.objects.count()}),
+        model=Litter,
+        valid_data={},
+        redirect_url=reverse('litters')
+    )

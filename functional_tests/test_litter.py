@@ -31,7 +31,23 @@ class TestLitter(TestHelper):
         self.assertGreater(new_count, old_count)
 
     def test_user_can_delete_litter(self):
-        self.fail("finish the test")
+        test_litter = Litter.objects.get(pk=1)
+        # the user logs into the website
+        self.log_in_to_site()
+        # they go to the litter page
+        self.navigate_to_litters_page()
+        # they see the litter they want to delete
+        old_count = self.count_elements_by_class("litter")
+        self.assertGreater(old_count, 0)
+        # they click the link
+        self.find_and_click(f"delete_{test_litter.pk}_link")
+        self.assertTitleEquals(f'Delete {test_litter.name}')
+        # they click confirm
+        self.find_and_click("confirm_delete_btn")
+        # they are taken to the litter page
+        self.assertTitleEquals("Litters")
+        new_count = self.count_elements_by_class("litter")
+        self.assertLess(new_count, old_count)
 
     def test_can_update_litter(self):
         test_litter = Litter.objects.get(pk=1)

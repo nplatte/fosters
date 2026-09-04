@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, DeleteView
 from litter.models import *
 from django.urls import reverse_lazy
 
@@ -38,3 +38,16 @@ class UpdateLitterView(UpdateView):
         obj = super().get_object()
         context['title'] = f"Edit {obj.name}"
         return context
+
+
+class DeleteLitterView(DeleteView):
+
+    template_name = "litter/generic/delete.html"
+    success_url = reverse_lazy('litters')
+    model = Litter
+
+    def get_context_data(self, **kwargs):
+        return {
+            'title': f"Delete {kwargs['object'].name}"
+        }
+
