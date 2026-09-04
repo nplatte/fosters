@@ -83,3 +83,27 @@ class TestEvent(TestHelper):
         # they see the event weight is updated
         event_weight = self.findElementByID("event_1_weight")
         self.assertEqual(event_weight.text, "200 grams")
+
+    def test_delete_event(self):
+        cat = Cat.objects.get(pk=1)
+        # the user logs into the page
+        self.log_in_to_site()
+        # the user goes to the cats page
+        self.navigate_to_cats_page()
+        # they click a cat
+        self.find_and_click("view_1_link")
+        self.assertTitleEquals(cat.name)
+        # they see the event they want to delete
+        event_count = self.count_elements_by_class("event")
+        self.assertGreater(event_count, 0)
+        self.find_and_click("delete_1_link")
+        # they are taken to a new page
+        self.assertTitleEquals("Delete Event")
+        # they click the submit button 
+        self.find_and_click("submit-btn")
+        # they are taken back to the cat page
+        self.assertTitleEquals(cat.name)
+        # they see less events
+        new_count = self.count_elements_by_class("event")
+        self.assertLess(new_count, event_count)
+
