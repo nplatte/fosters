@@ -17,9 +17,9 @@
     <p id="event_{{ event.pk }}_meds">{{ event.medications }}</p>
     <p id="event_{{ event.pk }}_weight">{{ event.weight }} grams</p>
     <p id="event_{{ event.pk }}_condition">{{ event.condition }}</p>
-    <a href="{% url 'edit_event' event.pk %}" id="event_{{ event.pk }}_edit">Edit Event</a>
+    <a href="{% url 'update_event' event.pk %}" id="event_{{ event.pk }}_edit">Edit Event</a>
     <a href="{% url 'delete_event' event.pk %}" id="event_{{ event.pk }}_delete">Delete Event</a>
 </div>
 {% endfor %}
-<a href="{% url 'add_event' %}" id="add_event"> Add Event</a>
+<a href="{% url 'create_event' %}" id="add_event"> Add Event</a>
 {% endblock %}
