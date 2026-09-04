@@ -25,3 +25,14 @@ class TestDeleteCatView(DeleteViewTestCaseMixin, TestCase):
         valid_data={},
         redirect_url=reverse('all_cats')
     )
+
+class TestDeleteEventView(DeleteViewTestCaseMixin, TestCase):
+
+    def get_test_case(self):
+        return AddViewTestCase(
+        name="Delete Event",
+        url=reverse('delete_event', kwargs={'pk': Event.objects.count()}),
+        model=Event,
+        valid_data={},
+        redirect_url=reverse('all_cats')
+    )

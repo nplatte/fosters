@@ -10,7 +10,7 @@ class DeleteViewTestCaseMixin:
         response = self.client.get(self.tc.url)
         self.assertEqual(response.status_code, 200)
 
-    def _assert_POST_deletes_model(self):
+    def test_POST_deletes_model(self):
         old_count = self.tc.model.objects.count()
         self.client.post(self.tc.url, data=self.tc.valid_data)
         new_count = self.tc.model.objects.count()
