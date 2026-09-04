@@ -3,6 +3,19 @@ from django.test import TestCase
 from django.urls import reverse
 from litter.models import Cat
 
+
+class TestAllCatsView(BaseTestCaseMixin, TestCase):
+
+    def get_test_case(self):
+        return ViewTestCase(
+            name="All Cats Test",
+            url=reverse('all_cats'),
+            model=None,
+            valid_data={},
+            redirect_url=None
+        )
+
+
 class TestAddCatView(CreateViewTestCaseMixin, TestCase):
 
     def get_test_case(self):
