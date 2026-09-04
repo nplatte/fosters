@@ -1,31 +1,32 @@
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from functional_tests.foster_helper import TestHelper
 
 
-class TestLitter(StaticLiveServerTestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        options = Options()
-        options.add_argument("--headless")
-        cls.browser = webdriver.Firefox(options=options)        
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.browser.close()
-        return super().tearDownClass()
+class TestLitter(TestHelper):
 
     def setUp(self):
         self.browser.delete_all_cookies()
         return super().setUp()
 
-    def tearDown(self):
-        return super().tearDown()
-
     def test_can_add_litter(self):
-        self.fail("finish the test")
+        # the user logs into the website
+        self.log_in_to_site()
+        # they go to the litters page
+        self.find_and_click('litters_link')
+        self.assertTitleEquals("Litters")
+        old_count = self.count_elements_by_class("litter")
+        # they click add litter
+        self.find_and_click('add_link')
+        self.assertTitleEquals("Add Litter")
+        # they fill out the form
+        data = {
+            "name": "new Litter"
+        }
+        self.fill_in_form_by_ids(data)
+        # they are redirected to the litters page
+        self.assertTitleEquals("Litters")
+        # they see a new litter created
+        new_count = self.count_elements_by_class("litter")
+        self.assertGreater(new_count, old_count)
 
     def test_can_add_cat_to_litter(self):
         self.fail("finish the test")

@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 from litter.models import *
 
 
@@ -12,6 +12,11 @@ class AddLitterView(CreateView):
         return {
             "title": "Add Event"
         }
+
+class AllLittersView(ListView):
+
+    model = Litter
+    template_name = 'litter/litter/all.html'
 
 
 class LitterView(DetailView):
