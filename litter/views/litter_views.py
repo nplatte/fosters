@@ -32,3 +32,8 @@ class UpdateLitterView(UpdateView):
     model = Litter
     fields = ["name"]
     template_name = 'litter/generic/edit.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f"Update {kwargs['object'].name}"
+        return context
