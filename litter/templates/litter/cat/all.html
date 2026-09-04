@@ -8,7 +8,7 @@
     <h1>{{ cat.name }}</h1>
     <label>Litter: </label><p>{{ cat.litter }}</p>
     <a href="{{ cat.get_absolute_url }}" id="view_{{ cat.pk }}_link">View Cat</a>
-    <a href="{% url 'edit_cat' cat.pk %}" id="edit_{{ cat.pk }}_link">Edit Cat</a>    
+    <a href="{% url 'update_cat' cat.pk %}" id="edit_{{ cat.pk }}_link">Edit Cat</a>    
     <a href="{% url 'delete_cat' cat.pk %}" id="delete_{{ cat.pk }}_link">Delete Cat</a>
 </div>
 

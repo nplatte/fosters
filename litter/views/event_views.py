@@ -38,4 +38,4 @@ class DeleteEventView(DeleteView):
         }
 
     def get_success_url(self):
-        return reverse_lazy('cat', kwargs={'pk': self.object.cat.pk})
+        return  self.object.cat.get_absolute_url()

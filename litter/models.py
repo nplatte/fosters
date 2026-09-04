@@ -15,7 +15,7 @@ class Cat(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     def get_absolute_url(self):
-        return reverse('cat', kwargs={"pk": self.pk})
+        return reverse('read_cat', kwargs={"pk": self.pk})
 
 
 class Litter(models.Model):

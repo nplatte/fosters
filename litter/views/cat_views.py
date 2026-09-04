@@ -58,7 +58,7 @@ class UpdateCatView(UpdateView):
 class DeleteCatView(DeleteView):
 
     template_name = "litter/generic/delete.html"
-    success_url = reverse_lazy('all_cats')
+    success_url = reverse_lazy('read_cats')
     model = Cat
 
     def get_context_data(self, **kwargs):

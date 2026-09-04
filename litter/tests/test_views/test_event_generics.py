@@ -12,7 +12,7 @@ class TestAddEventView(CreateViewTestCaseMixin, TestCase):
         model=Event,
         valid_data={"medications": "Clab, Blab, Rave",
             "weight": "123", "condition": "super cute", "cat":1},
-        redirect_url=reverse("cat", kwargs={"pk": 1}))
+        redirect_url=reverse("read_cat", kwargs={"pk": 1}))
 
 
 class TestEditEventView(UpdateViewTestCaseMixin, TestCase):
@@ -23,7 +23,7 @@ class TestEditEventView(UpdateViewTestCaseMixin, TestCase):
         url=reverse('edit_event', kwargs={"pk": 1}),
         model=Event,
         valid_data={"weight": "312", "condition": "super cute", "cat": "1"},
-        redirect_url=reverse("cat", kwargs={"pk": Event.objects.count()}))
+        redirect_url=reverse("read_cat", kwargs={"pk": Event.objects.count()}))
 
 
 class TestDeleteEventView(DeleteViewTestCaseMixin, TestCase):
@@ -34,5 +34,5 @@ class TestDeleteEventView(DeleteViewTestCaseMixin, TestCase):
         url=reverse('delete_event', kwargs={'pk': Event.objects.count()}),
         model=Event,
         valid_data={},
-        redirect_url=reverse("cat", kwargs={"pk": 1})
+        redirect_url=reverse("read_cat", kwargs={"pk": 1})
     )

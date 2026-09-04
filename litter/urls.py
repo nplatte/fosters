@@ -6,10 +6,10 @@ from litter.views import event_views as event_views
 urlpatterns = [
     path("", cat_views.LandingView.as_view(), name='landing'),
     path("cat/", include([
-        path("add", cat_views.AddCatView.as_view(), name='add_cat'),
-        path("edit/<int:pk>", cat_views.UpdateCatView.as_view(), name='edit_cat'),
-        path("view/all", cat_views.AllCatsView.as_view(), name='all_cats'),
-        path("view/<int:pk>", cat_views.CatView.as_view(), name='cat'),
+        path("add", cat_views.AddCatView.as_view(), name='create_cat'),
+        path("view/all", cat_views.AllCatsView.as_view(), name='read_cats'),
+        path("view/<int:pk>", cat_views.CatView.as_view(), name='read_cat'),        
+        path("edit/<int:pk>", cat_views.UpdateCatView.as_view(), name='update_cat'),
         path("delete/<int:pk>", cat_views.DeleteCatView.as_view(), name='delete_cat')
     ])),
     path("litter/", include([
