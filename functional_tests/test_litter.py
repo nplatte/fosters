@@ -28,10 +28,16 @@ class TestLitter(TestHelper):
         new_count = self.count_elements_by_class("litter")
         self.assertGreater(new_count, old_count)
 
-    def test_can_add_cat_to_litter(self):
+    def test_user_can_delete_litter(self):
         self.fail("finish the test")
 
-    def test_can_update_litter_info(self):
+    def test_can_update_litter(self):
+        self.fail("finish the test")
+
+    def test_user_can_view_litter(self):
+        self.fail("finish the test")
+
+    def test_can_add_cat_to_litter(self):
         self.fail("finish the test")
 
     def test_can_remove_cats_in_litter(self):
