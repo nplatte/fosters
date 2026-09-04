@@ -12,6 +12,15 @@ class TestAllLittersView(BaseTestCaseMixin, TestCase):
             url=reverse('litters'),
         )
 
+class TestDetailLitterView(BaseTestCaseMixin, TestCase):
+
+    def get_test_case(self):
+        return ViewTestCase(
+            name="Detail Litter Test",
+            url=reverse('litter', kwargs={"pk": 1}),
+        )
+
+
 class TestAddLitterView(CreateViewTestCaseMixin, TestCase):
 
     def get_test_case(self):

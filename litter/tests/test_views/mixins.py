@@ -13,7 +13,7 @@ class ViewTestCase:
 
 class BaseTestCaseMixin:
 
-    fixtures = ['cats', 'events']
+    fixtures = ['litters', 'cats', 'events']
     tc_name = None
 
     def setUp(self):
