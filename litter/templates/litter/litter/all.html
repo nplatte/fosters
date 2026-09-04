@@ -6,11 +6,11 @@
 {% for litter in object_list %}
 <div class="litter">
     <p id="litter_{{ litter.pk }}_name">{{ litter.name }}</p>
-    <a id="view_{{ litter.pk }}_link" href="{% url 'litter' litter.pk %}">View Litter</a>
+    <a id="view_{{ litter.pk }}_link" href="{% url 'read_litter' litter.pk %}">View Litter</a>
     <a id="update_{{ litter.pk }}_link" href="{% url 'update_litter' litter.pk %}">Edit Litter</a>
     <a id="delete_{{ litter.pk }}_link" href="{% url 'delete_litter' litter.pk %}">Delete Litter</a>
 </div>
 
 {% endfor %}
-<a href="{% url 'add_litter' %}" id="add_link">Add Litter</a>
+<a href="{% url 'create_litter' %}" id="add_link">Add Litter</a>
 {% endblock %}

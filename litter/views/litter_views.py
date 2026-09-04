@@ -8,7 +8,7 @@ class AddLitterView(CreateView):
     model = Litter
     fields = ['name']
     template_name = 'litter/generic/add.html'
-    success_url = reverse_lazy('litters')
+    success_url = reverse_lazy('read_litters')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -43,7 +43,7 @@ class UpdateLitterView(UpdateView):
 class DeleteLitterView(DeleteView):
 
     template_name = "litter/generic/delete.html"
-    success_url = reverse_lazy('litters')
+    success_url = reverse_lazy('read_litters')
     model = Litter
 
     def get_context_data(self, **kwargs):

@@ -9,7 +9,7 @@ class TestAllLittersView(BaseTestCaseMixin, TestCase):
     def get_test_case(self):
         return ViewTestCase(
             name="All Litters Test",
-            url=reverse('litters'),
+            url=reverse('read_litters'),
         )
 
 class TestDetailLitterView(BaseTestCaseMixin, TestCase):
@@ -17,7 +17,7 @@ class TestDetailLitterView(BaseTestCaseMixin, TestCase):
     def get_test_case(self):
         return ViewTestCase(
             name="Detail Litter Test",
-            url=reverse('litter', kwargs={"pk": 1}),
+            url=reverse('read_litter', kwargs={"pk": 1}),
         )
 
 
@@ -26,10 +26,10 @@ class TestAddLitterView(CreateViewTestCaseMixin, TestCase):
     def get_test_case(self):
         return ViewTestCase(
             name="Add Litters Test",
-            url=reverse('add_litter'),
+            url=reverse('create_litter'),
             model=Litter,
             valid_data={"name": "test 123"},
-            redirect_url=reverse('litters'),
+            redirect_url=reverse('read_litters'),
             fields=['name']
         )
 
@@ -42,7 +42,7 @@ class TestUpdateLitterView(UpdateViewTestCaseMixin, TestCase):
             url=reverse('update_litter', kwargs={"pk": 1}),
             model=Litter,
             valid_data={"name": "test 123"},
-            redirect_url=reverse('litter', kwargs={"pk": 1}),
+            redirect_url=reverse('read_litter', kwargs={"pk": 1}),
             fields=['name']
         )
 
@@ -54,5 +54,5 @@ class TestDeleteLitterView(DeleteViewTestCaseMixin, TestCase):
         url=reverse('delete_litter', kwargs={'pk': Litter.objects.count()}),
         model=Litter,
         valid_data={},
-        redirect_url=reverse('litters')
+        redirect_url=reverse('read_litters')
     )

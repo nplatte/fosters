@@ -24,7 +24,7 @@ class Litter(models.Model):
     is_deleted = models.BooleanField(default=False)
 
     def get_absolute_url(self):
-        return reverse('litter', kwargs={"pk": self.pk})
+        return reverse('read_litter', kwargs={"pk": self.pk})
 
 
 class Event(models.Model):

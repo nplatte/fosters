@@ -13,9 +13,9 @@ urlpatterns = [
         path("delete/<int:pk>", cat_views.DeleteCatView.as_view(), name='delete_cat')
     ])),
     path("litter/", include([
-        path("add", litter_views.AddLitterView.as_view(), name='add_litter'),
-        path("view/<int:pk>", litter_views.LitterView.as_view(), name='litter'),
-        path("view/all", litter_views.AllLittersView.as_view(), name='litters'),
+        path("add", litter_views.AddLitterView.as_view(), name='create_litter'),
+        path("view/<int:pk>", litter_views.LitterView.as_view(), name='read_litter'),
+        path("view/all", litter_views.AllLittersView.as_view(), name='read_litters'),
         path("edit/<int:pk>", litter_views.UpdateLitterView.as_view(), name='update_litter'),
         path("delete/<int:pk>", litter_views.DeleteLitterView.as_view(), name='delete_litter')
     ])),
