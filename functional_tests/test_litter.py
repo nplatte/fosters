@@ -1,7 +1,10 @@
 from functional_tests.foster_helper import TestHelper
+from litter.models import Litter
 
 
 class TestLitter(TestHelper):
+
+    fixtures = ['litters']
 
     def setUp(self):
         self.browser.delete_all_cookies()
@@ -11,8 +14,7 @@ class TestLitter(TestHelper):
         # the user logs into the website
         self.log_in_to_site()
         # they go to the litters page
-        self.find_and_click('litters_link')
-        self.assertTitleEquals("Litters")
+        self.navigate_to_litters_page()
         old_count = self.count_elements_by_class("litter")
         # they click add litter
         self.find_and_click('add_link')
@@ -35,7 +37,20 @@ class TestLitter(TestHelper):
         self.fail("finish the test")
 
     def test_user_can_view_litter(self):
-        self.fail("finish the test")
+        test_litter = Litter.objects.get(pk=1)
+        # the user logs into the site
+        self.log_in_to_site()
+        # they go to the litters page
+        self.navigate_to_litters_page()
+        # they see the existing litter name
+        litter_name = self.findElementByID("litter_1_name")
+        self.assertEqual(litter_name.text, test_litter.name)
+        # they click the view litter link
+        self.find_and_click("litter_1_link")
+        self.assertTitleEquals(test_litter.name)
+        # they see the name
+        litter_name = self.findElementByID("litter_name")
+        self.assertEqual(litter_name.text, test_litter.name)
 
     def test_can_add_cat_to_litter(self):
         self.fail("finish the test")

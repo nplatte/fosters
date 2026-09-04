@@ -1,4 +1,4 @@
 - model: litter.litter
   pk: 1
   fields:
-    name: "New Litter"
+    name: "The Rock Socks"

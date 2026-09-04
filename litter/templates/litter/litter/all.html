@@ -3,8 +3,10 @@
 {% block title %} Litters {% endblock %}
 
 {% block content %}
-{% for cat in object_list %}
+{% for litter in object_list %}
 <div class="litter">
+    <p id="litter_{{ litter.pk }}_name">{{ litter.name }}</p>
+    <a id="litter_{{ litter.pk }}_link" href="{% url 'litter' litter.pk %}">View Litter</a>
 </div>
 
 {% endfor %}

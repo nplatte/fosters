@@ -58,9 +58,12 @@ class TestHelper(StaticLiveServerTestCase):
         self.assertTitleEquals("Home Page")
 
     def navigate_to_cats_page(self):
-        cats_link = self.findElementByID('cats_link')
-        cats_link.click()
+        self.find_and_click("cats_link")
         self.assertTitleEquals("Cats")
+
+    def navigate_to_litters_page(self):
+        self.find_and_click("litters_link")
+        self.assertTitleEquals("Litters")
 
     def find_and_click(self, id):
         element = self.findElementByID(id)
