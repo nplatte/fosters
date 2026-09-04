@@ -54,3 +54,21 @@ def build_edit_view_test_cases():
     return [
         cat_test_case, event_test_case
     ]
+
+
+def build_delete_view_test_cases():
+    cat_test_case = AddViewTestCase(
+        name="Delete Cat",
+        url=reverse('delete_cat', kwargs={'pk': Cat.objects.count()}),
+        model=Cat,
+        valid_data={},
+        redirect_url=reverse('all_cats')
+    )
+    event_test_case = AddViewTestCase(
+        name="Delete Event",
+        url=reverse('delete_event', kwargs={'pk': Event.objects.count()}),
+        model=Event,
+        valid_data={},
+        redirect_url=reverse('cat', kwargs={'pk': Cat.objects.count()})
+    )
+    return [ cat_test_case, event_test_case ]

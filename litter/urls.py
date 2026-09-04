@@ -19,5 +19,6 @@ urlpatterns = [
     path("event/", include([
         path("add/", event_views.AddEventView.as_view(), name='add_event'), 
         path("edit/<int:pk>", event_views.UpdateEventView.as_view(), name='edit_event'), 
+        path("delete/<int:pk>", event_views.DeleteEventView.as_view(), name='delete_event')
     ]))
 ]

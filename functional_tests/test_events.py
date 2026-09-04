@@ -96,7 +96,7 @@ class TestEvent(TestHelper):
         # they see the event they want to delete
         event_count = self.count_elements_by_class("event")
         self.assertGreater(event_count, 0)
-        self.find_and_click("delete_1_link")
+        self.find_and_click("event_1_delete")
         # they are taken to a new page
         self.assertTitleEquals("Delete Event")
         # they click the submit button 
