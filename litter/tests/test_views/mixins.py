@@ -14,12 +14,21 @@ class BaseTestCaseMixin:
 
 class RedirectTestCaseMixin(BaseTestCaseMixin):
 
-    def test_POST_success_rediret_to_page(self):
+    def test_POST_success_redirect_to_page(self):
         response = self.client.post(self.tc.url, self.tc.valid_data)
         self.assertRedirects(response, self.tc.redirect_url)
 
 
-class EditViewTestCaseMixin(RedirectTestCaseMixin):
+class CreateViewTestCaseMixin(RedirectTestCaseMixin):
+
+    def test_POST_makes_model(self):
+        old_count = self.tc.model.objects.count()
+        response = self.client.post(self.tc.url, self.tc.valid_data)
+        new_count = self.tc.model.objects.count()
+        self.assertGreater(new_count, old_count)
+
+
+class UpdateViewTestCaseMixin(RedirectTestCaseMixin):
 
     def test_POST_edits_model(self):
         old_count = self.tc.model.objects.count()
@@ -35,4 +44,3 @@ class DeleteViewTestCaseMixin(RedirectTestCaseMixin):
         self.client.post(self.tc.url, data=self.tc.valid_data)
         new_count = self.tc.model.objects.count()
         self.assertLess(new_count, old_count)
-        
