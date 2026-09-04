@@ -30,10 +30,12 @@ class UpdateEventView(UpdateView):
 class DeleteEventView(DeleteView):
 
     template_name = "litter/generic/delete.html"
-    success_url = reverse_lazy('all_cats')
     model = Event
 
     def get_context_data(self, **kwargs):
         return {
             'title': f"Delete Event"
         }
+
+    def get_success_url(self):
+        return reverse_lazy('cat', kwargs={'pk': self.object.cat.pk})

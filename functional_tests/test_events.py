@@ -100,7 +100,7 @@ class TestEvent(TestHelper):
         # they are taken to a new page
         self.assertTitleEquals("Delete Event")
         # they click the submit button 
-        self.find_and_click("submit-btn")
+        self.find_and_click("confirm_delete_btn")
         # they are taken back to the cat page
         self.assertTitleEquals(cat.name)
         # they see less events

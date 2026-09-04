@@ -34,5 +34,5 @@ class TestDeleteEventView(DeleteViewTestCaseMixin, TestCase):
         url=reverse('delete_event', kwargs={'pk': Event.objects.count()}),
         model=Event,
         valid_data={},
-        redirect_url=reverse('all_cats')
+        redirect_url=reverse("cat", kwargs={"pk": 1})
     )
